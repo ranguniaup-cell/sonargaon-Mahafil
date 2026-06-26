@@ -1,0 +1,6 @@
+{
+  "name": "Sonargaon Celebration Council",
+  "description": "সোনারগাঁও পবিত্র ঈদে মিলাদুন্নবী (দঃ) উদযাপন পরিষদের প্রাতিষ্ঠানিক ওয়েবসাইট, কমিটি তালিকা এবং রিয়েল-টাইম আয়-ব্যয় হিসাব ও রিপোর্ট প্যানেল।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

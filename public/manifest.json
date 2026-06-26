@@ -1,0 +1,22 @@
+{
+  "short_name": "মিলাদুন্নবী মাহফিল",
+  "name": "পবিত্র ঈদে মিলাদুন্নবী (দঃ) মাহফিল হিসাব",
+  "description": "সোনারগাঁও উদযাপন পরিষদের ২০২৫ সালের আয়-ব্যয় ও কমিটি তালিকা",
+  "icons": [
+    {
+      "src": "/src/assets/images/logo.jpg",
+      "type": "image/jpeg",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/src/assets/images/logo.jpg",
+      "type": "image/jpeg",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#fdfcf7",
+  "theme_color": "#5d6d3e",
+  "display": "standalone",
+  "orientation": "portrait"
+}
