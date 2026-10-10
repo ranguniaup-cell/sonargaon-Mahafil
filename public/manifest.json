@@ -1,22 +1,72 @@
 {
-  "short_name": "মিলাদুন্নবী মাহফিল",
-  "name": "পবিত্র ঈদে মিলাদুন্নবী (দঃ) মাহফিল হিসাব",
-  "description": "সোনারগাঁও উদযাপন পরিষদের ২০২৫ সালের আয়-ব্যয় ও কমিটি তালিকা",
+  "id": "/",
+  "short_name": "মিলাদুন্নবী",
+  "name": "সোনারগাঁও ঈদে মিলাদুন্নবী (দঃ) মাহফিল",
+  "description": "পবিত্র ঈদে মিলাদুন্নবী (দঃ) মাহফিল সোনারগাঁও উদযাপন পরিষদের অফিশিয়াল মোবাইল অ্যাপ",
+  "lang": "bn-BD",
+  "dir": "ltr",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#064e3b",
+  "theme_color": "#0f766e",
+  "prefer_related_applications": false,
+  "categories": ["utilities", "lifestyle", "education", "books"],
   "icons": [
     {
-      "src": "/src/assets/images/logo.jpg",
-      "type": "image/jpeg",
-      "sizes": "192x192"
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
-      "src": "/src/assets/images/logo.jpg",
-      "type": "image/jpeg",
-      "sizes": "512x512"
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180",
+      "purpose": "any"
     }
   ],
-  "start_url": "/",
-  "background_color": "#fdfcf7",
-  "theme_color": "#5d6d3e",
-  "display": "standalone",
-  "orientation": "portrait"
+  "shortcuts": [
+    {
+      "name": "মূল পাতা",
+      "short_name": "মূল পাতা",
+      "description": "মাহফিলের মূল পাতা",
+      "url": "/?tab=home",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "আয়-ব্যয় হিসাব",
+      "short_name": "হিসাব",
+      "description": "মাহফিলের আয়-ব্যয় বিবরণী",
+      "url": "/?tab=finance",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "উদযাপন পরিষদ",
+      "short_name": "কমিটি",
+      "description": "কমিটি সদস্য তালিকা",
+      "url": "/?tab=committee",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
 }

@@ -3,17 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
-    <meta name="theme-color" content="#5d6d3e" />
+    <meta name="theme-color" content="#0f766e" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="মিলাদুন্নবী মাহফিল" />
-    <link rel="apple-touch-icon" href="/src/assets/images/logo.jpg" />
+    <meta name="application-name" content="মিলাদুন্নবী মাহফিল" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png" />
     <link rel="manifest" href="/manifest.json" />
     <title>পবিত্র ঈদে মিলাদুন্নবী (দঃ) মাহফিল - সোনারগাঁও উদযাপন পরিষদ</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.deferredPrompt = null;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        console.log('[PWA Debug] beforeinstallprompt event fired! PWA is eligible for native installation.');
+        // Stash the event so it can be triggered later.
+        window.deferredPrompt = e;
+        // Dispatch a custom event to notify React components
+        window.dispatchEvent(new CustomEvent('pwa-installable', { detail: e }));
+      });
+
+      window.addEventListener('appinstalled', (e) => {
+        console.log('[PWA Debug] appinstalled event fired! App has been successfully installed on the device.');
+      });
+
+      if ('serviceWorker' in navigator) {
+        const registerSW = () => {
+          console.log('[PWA Debug] Attempting to register Service Worker...');
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('[PWA Debug] Service Worker registered successfully! Scope:', registration.scope);
+              
+              // Force check for updates on page load, handling potential network or fetch errors safely
+              registration.update().then(() => {
+                console.log('[PWA Debug] SW update check completed successfully.');
+              }).catch((err) => {
+                console.warn('[PWA Debug] Service Worker update check skipped or failed:', err);
+              });
+              
+              // Listen for updates
+              registration.onupdatefound = () => {
+                console.log('[PWA Debug] New Service Worker update found.');
+                const installingWorker = registration.installing;
+                if (installingWorker) {
+                  installingWorker.onstatechange = () => {
+                    console.log('[PWA Debug] Installing worker state changed to:', installingWorker.state);
+                    if (installingWorker.state === 'installed') {
+                      if (navigator.serviceWorker.controller) {
+                        console.log('[PWA Debug] New content is available; please refresh.');
+                      } else {
+                        console.log('[PWA Debug] Content is cached for offline use.');
+                      }
+                    }
+                  };
+                }
+              };
+            })
+            .catch((error) => {
+              console.error('[PWA Debug] Service Worker registration failed!', error);
+              console.error('[PWA Debug] Detailed Error Object:', {
+                name: error?.name,
+                message: error?.message,
+                stack: error?.stack,
+                navigatorOnline: navigator.onLine,
+                secureContext: window.isSecureContext
+              });
+            });
+        };
+
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+          registerSW();
+        } else {
+          window.addEventListener('load', registerSW);
+        }
+      } else {
+        console.warn('[PWA Debug] serviceWorker is not supported in this browser navigator.');
+      }
+    </script>
   </body>
 </html>
 
